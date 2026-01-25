@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { dark } from "@clerk/themes"
+import UserSync from "@/components/UserSync";
 import {
   ClerkProvider,
   SignInButton,
@@ -40,6 +41,8 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
         >
+          {/* this is done in the home page component */}
+          <UserSync />
           {children}
         </body>
       </html>
