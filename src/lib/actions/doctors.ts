@@ -14,7 +14,7 @@ export async function getDoctors() {
       orderBy: { createdAt: "desc" },
     });
 
-    return doctors.map((doctor) => ({
+    return doctors.map((doctor) => ({ 
       ...doctor,
       appointmentCount: doctor._count.appointments,
     }));
@@ -98,23 +98,6 @@ export async function updateDoctor(input: UpdateDoctorInput) {
         isActive: input.isActive,
       },
     });
-    // const doctor = await prisma.doctor.update({
-    //   where: { id: input.id },
-    //   data: {
-    //     name: input.name,
-    //     email: input.email,
-    //     phone: input.phone,
-    //     speciality: input.speciality,
-    //     gender: input.gender,
-    //     isActive: input.isActive,
-    //     imageUrl: generateAvatar(
-    //       input.name!,
-    //       input.gender!
-    //     ),
-    //   },
-    // });
-
-
     return doctor;
   } catch (error) {
     console.error("Error updating doctor:", error);
