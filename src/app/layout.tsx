@@ -11,6 +11,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import TanStackProvider from "@/components/providers/TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,19 +34,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-      baseTheme: dark,//for dark mode during signup
-    }}>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-        >
-          {/* this is done in the home page component */}
-          <UserSync />
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <TanStackProvider>
+      <ClerkProvider
+        appearance={{
+        baseTheme: dark,//for dark mode during signup
+      }}>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+          >
+            {/* this is done in the home page component */}
+            <UserSync />
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </TanStackProvider>
+    
   );
 }
