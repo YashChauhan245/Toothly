@@ -42,6 +42,8 @@ next-env.d.ts
 
 /src/generated/prisma
 
-
 # docs
 docs/admin_page.md
+
+# vapi script
+src/lib/vapi-prompt.ts
