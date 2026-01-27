@@ -93,5 +93,4 @@ async function NextAppointment() {
     </Card>
   );
 }
-
 export default NextAppointment;

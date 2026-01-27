@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function MainActions() {
+  
   return (
     <div className="grid md:grid-cols-2 gap-8 mb-12">
       {/* AI Voice Assistant */}

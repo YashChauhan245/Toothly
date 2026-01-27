@@ -9,7 +9,6 @@ import { Button } from "../ui/button";
 async function DentalHealthOverview() {
   const appointmentStats = await getUserAppointmentStats();
   const user = await currentUser();
-
   return (
     <Card className="lg:col-span-2">
       <CardHeader>
