@@ -8,7 +8,6 @@ function ProPlanRequired() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8 pt-24">
         {/* Access Denied Section */}

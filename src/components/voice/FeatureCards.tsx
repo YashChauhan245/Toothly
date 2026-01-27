@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MicIcon, ShieldIcon, CalendarIcon } from "lucide-react";
 
 function FeatureCards() {
+  
   return (
     <div className="grid md:grid-cols-2 gap-8 mb-12">
       {/* how to use card */}

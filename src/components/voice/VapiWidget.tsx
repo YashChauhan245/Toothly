@@ -278,5 +278,4 @@ function VapiWidget() {
     </div>
   );
 }
-
 export default VapiWidget;
