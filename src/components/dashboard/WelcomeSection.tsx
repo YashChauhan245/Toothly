@@ -5,7 +5,8 @@ import { currentUser } from "@clerk/nextjs/server";
 export default async function WelcomeSection() {
   const user = await currentUser();
   return (
-    <div className="relative z-10 flex items-center justify-between bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 border border-primary/20 mb-12 overflow-hidden">
+    // <div className="relative z-10 flex items-center justify-between bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 border border-primary/20 mb-12 overflow-hidden">
+    <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between items-center text-center md:text-left ...">
       <div className="space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
           <div className="size-2 bg-primary rounded-full animate-pulse"></div>
