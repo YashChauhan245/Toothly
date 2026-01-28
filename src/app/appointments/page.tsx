@@ -49,6 +49,45 @@ function AppointmentsPage() {
         time: selectedTime,
         reason: appointmentType?.name,
       },
+      {
+        onSuccess: async (appointment) => {
+          // store the appointment details to show in the modal
+          setBookedAppointment(appointment);
+
+          try {
+            const emailResponse = await fetch("/api/send-appointment-email", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userEmail: appointment.patientEmail,
+                doctorName: appointment.doctorName,
+                appointmentDate: format(new Date(appointment.date), "EEEE, MMMM d, yyyy"),
+                appointmentTime: appointment.time,
+                appointmentType: appointmentType?.name,
+                duration: appointmentType?.duration,
+                price: appointmentType?.price,
+              }),
+            });
+
+            if (!emailResponse.ok) console.error("Failed to send confirmation email");
+          } catch (error) {
+            console.error("Error sending confirmation email:", error);
+          }
+
+          // show the success modal
+          setShowConfirmationModal(true);
+
+          // reset form
+          setSelectedDentistId(null);
+          setSelectedDate("");
+          setSelectedTime("");
+          setSelectedType("");
+          setCurrentStep(1);
+        },
+        onError: (error) => toast.error(`Failed to book appointment: ${error.message}`),
+      }
     );
   };
 
@@ -109,6 +148,7 @@ function AppointmentsPage() {
             doctorName: bookedAppointment.doctorName,
             appointmentDate: format(new Date(bookedAppointment.date), "EEEE, MMMM d, yyyy"),
             appointmentTime: bookedAppointment.time,
+            userEmail: bookedAppointment.patientEmail,
           }}
         />
       )}

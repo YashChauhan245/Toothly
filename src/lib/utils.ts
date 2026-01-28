@@ -23,9 +23,6 @@ export function generateAvatar(
 }
 
 
-
-
-
 // phone formatting function for US numbers - ai generated 🎉
 export const formatPhoneNumber = (value: string = ""): string => {
   let digits = value.replace(/\D/g, "");
@@ -56,6 +53,7 @@ export const getNext5Days = () => {
   return dates;
 };
 
+
 export const getAvailableTimeSlots = () => {
   return [
     "09:00",
@@ -72,6 +70,7 @@ export const getAvailableTimeSlots = () => {
     "16:30",
   ];
 };
+
 
 export const APPOINTMENT_TYPES = [
   { id: "checkup", name: "Regular Checkup", duration: "60 min", price: "$120" },
