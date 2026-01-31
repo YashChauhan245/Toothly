@@ -5,9 +5,10 @@ import { Button } from "../ui/button";
 
 function Header() {
   return (
-    // Fixed height = 64px (used in Hero height math)
+    // Fixed navbar height = 64px
     <nav className="fixed top-0 right-0 left-0 z-50 h-16 px-6 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto h-full flex items-center justify-between">
+        
         {/* LEFT: LOGO */}
         <Link href="/" className="flex items-center gap-2">
           <Image
@@ -25,24 +26,26 @@ function Header() {
 
         {/* CENTER: NAV LINKS */}
         <div className="hidden md:flex items-center gap-6">
-          <a
-            href="#how-it-works"
+          <Link
+            href="/#how-it-works"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             How it Works
-          </a>
-          <a
-            href="#pricing"
+          </Link>
+
+          <Link
+            href="/#pricing"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             Pricing
-          </a>
-          <a
-            href="#about"
+          </Link>
+
+          <Link
+            href="/#about"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             About
-          </a>
+          </Link>
         </div>
 
         {/* RIGHT: ACTIONS */}
