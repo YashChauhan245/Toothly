@@ -39,7 +39,7 @@ export default function RootLayout({
         appearance={{
         baseTheme: dark,//for dark mode during signup
       }}>
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
           >
