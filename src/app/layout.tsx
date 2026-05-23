@@ -24,8 +24,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Toothly-AI Powered Dental Assistant",
+  title: "Toothly",
   description: "Get instant dental advice through voice calls with our AI assistant. Avaiable 24/7.",
+  icons: {
+    icon: "/logo1.png",
+  },
 };
 
 export default function RootLayout({
