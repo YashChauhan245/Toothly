@@ -34,22 +34,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TanStackProvider>
-      <ClerkProvider
-        appearance={{
-        baseTheme: dark,//for dark mode during signup
-      }}>
-        <html lang="en" suppressHydrationWarning>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-          >
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+      >
+        <ClerkProvider
+          appearance={{
+            baseTheme: dark, // for dark mode during signup
+          }}
+        >
+          <TanStackProvider>
             {/* this is done in the home page component */}
             <UserSync />
             {children}
-          </body>
-        </html>
-      </ClerkProvider>
-    </TanStackProvider>
+          </TanStackProvider>
+        </ClerkProvider>
+      </body>
+    </html>
     
   );
 }
