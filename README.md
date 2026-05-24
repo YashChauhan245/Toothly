@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Toothly
+
+AI-powered dental care platform with appointment booking, admin operations, and a real-time voice assistant. Built for a polished, production-ready patient experience with secure auth, database-backed workflows, and transactional email.
+
+## Features
+
+- AI voice assistant with real-time transcription and audio UX
+- Appointment booking flow with dentist selection, time slots, and confirmation
+- Admin dashboard to manage doctors and appointments
+- Secure authentication, user sync, and subscription-gated routes
+- Transactional email confirmations on booking
+- Responsive marketing site and user dashboard
+
+## Tech Stack
+
+- Next.js 15 (App Router), React 19, TypeScript
+- Tailwind CSS v4, Radix UI primitives, shadcn/ui components
+- Prisma ORM with PostgreSQL
+- Clerk authentication and billing plans
+- Vapi voice SDK for AI calls
+- Resend + React Email for transactional emails
+- TanStack Query for client data caching
+- Biome for linting and formatting
+
+## Product Flow
+
+- Visitors land on the marketing site and can sign up via Clerk.
+- Authenticated users are routed to the dashboard and can book appointments.
+- Booking triggers a confirmation email and shows upcoming appointments.
+- Admins can manage doctors and update appointment statuses.
+- Voice assistant access is gated by paid plans (`ai_basic`, `ai_pro`).
+
+## Routes
+
+- `/` marketing site + sign up
+- `/dashboard` user dashboard
+- `/appointments` booking flow + upcoming appointments
+- `/voice` AI voice assistant (plan-gated)
+- `/pro` plan selection (Clerk pricing table)
+- `/admin` admin dashboard (email-gated)
+- `/api/send-appointment-email` transactional email endpoint
+
+## Environment Variables
+
+Create a `.env.local` file in the project root.
+
+Required by the codebase:
+
+- `DATABASE_URL` (PostgreSQL connection string)
+- `ADMIN_EMAIL` (email allowed to access `/admin`)
+- `RESEND_API_KEY` (Resend API key)
+- `NEXT_PUBLIC_APP_URL` (public app URL for email links)
+- `NEXT_PUBLIC_VAPI_API_KEY` (Vapi public API key)
+- `NEXT_PUBLIC_VAPI_ASSISTANT_ID` (Vapi assistant ID)
+
+Auth configuration (Clerk):
+
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+
+## Database
+
+Prisma models:
+
+- `User` with Clerk ID, profile fields, and appointments
+- `Doctor` with profile, status, and appointment counts
+- `Appointment` with status, reason, and timestamps
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies:
+
+```bash
+npm install
+```
+
+Generate Prisma client:
+
+```bash
+npx prisma generate
+```
+
+Apply database schema:
+
+```bash
+npx prisma migrate dev
+# or, for quick local setup without migrations
+npx prisma db push
+```
+
+Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - start Next.js dev server (Turbopack)
+- `npm run build` - generate Prisma client and build
+- `npm run start` - start production server
+- `npm run lint` - run Biome checks
+- `npm run format` - format with Biome
 
-## Learn More
+## Email and Voice
 
-To learn more about Next.js, take a look at the following resources:
+- Appointment confirmations use Resend and React Email templates.
+- Voice calls are powered by Vapi and gated by Clerk plans.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Configure the same environment variables in your hosting provider.
+- Ensure the database is reachable in production and run migrations.
+- Configure Clerk billing plans with IDs `ai_basic` and `ai_pro`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
