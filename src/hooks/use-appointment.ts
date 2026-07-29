@@ -53,9 +53,53 @@ export function useUpdateAppointmentStatus() {
 
   return useMutation({
     mutationFn: updateAppointmentStatus,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAppointments"] });
+    onMutate: async (newAppointmentStatus) => {
+      // Cancel any outgoing refetches so they don't overwrite optimistic update
+      await queryClient.cancelQueries({ queryKey: ["getAppointments"] });
+      await queryClient.cancelQueries({ queryKey: ["getUserAppointments"] });
+
+      // Snapshot previous values
+      const previousAppointments = queryClient.getQueryData<any[]>(["getAppointments"]);
+      const previousUserAppointments = queryClient.getQueryData<any[]>(["getUserAppointments"]);
+
+      // Optimistically update admin appointments cache
+      if (previousAppointments) {
+        queryClient.setQueryData<any[]>(
+          ["getAppointments"],
+          previousAppointments.map((apt) =>
+            apt.id === newAppointmentStatus.id
+              ? { ...apt, status: newAppointmentStatus.status }
+              : apt
+          )
+        );
+      }
+
+      // Optimistically update user appointments cache
+      if (previousUserAppointments) {
+        queryClient.setQueryData<any[]>(
+          ["getUserAppointments"],
+          previousUserAppointments.map((apt) =>
+            apt.id === newAppointmentStatus.id
+              ? { ...apt, status: newAppointmentStatus.status }
+              : apt
+          )
+        );
+      }
+
+      return { previousAppointments, previousUserAppointments };
     },
-    onError: (error) => console.error("Failed to update appointment:", error),
+    onError: (error, _variables, context) => {
+      if (context?.previousAppointments) {
+        queryClient.setQueryData(["getAppointments"], context.previousAppointments);
+      }
+      if (context?.previousUserAppointments) {
+        queryClient.setQueryData(["getUserAppointments"], context.previousUserAppointments);
+      }
+      console.error("Failed to update appointment:", error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAppointments"] });
+      queryClient.invalidateQueries({ queryKey: ["getUserAppointments"] });
+    },
   });
 }

@@ -78,7 +78,7 @@ function RecentAppointments() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleToggleAppointmentStatus(appointment.id)}
-                      className="h-6 px-2"
+                      className="h-6 px-2 hover:bg-transparent active:scale-95 transition-transform cursor-pointer"
                     >
                       {getStatusBadge(appointment.status)}
                     </Button>
