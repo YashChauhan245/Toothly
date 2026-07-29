@@ -1,4 +1,4 @@
-import HelpButton from "@/components/chatbox/HelpButton";
+// import HelpButton from "@/components/chatbox/HelpButton";
 import ActivityOverview from "@/components/dashboard/ActivityOverview";
 import MainActions from "@/components/dashboard/MainActions";
 import WelcomeSection from "@/components/dashboard/WelcomeSection";
@@ -14,7 +14,7 @@ function DashboardPage() {
         <MainActions />
         <ActivityOverview />
       </div>
-      <HelpButton/>
+      {/* <HelpButton/> */}
     </>
   );
 }

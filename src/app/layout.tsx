@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { dark } from "@clerk/themes"
 import UserSync from "@/components/UserSync";
+import Script from "next/script";
+
 import {
   ClerkProvider,
   SignInButton,
@@ -52,8 +54,15 @@ export default function RootLayout({
             {children}
           </TanStackProvider>
         </ClerkProvider>
+
+        {/* EchoDesk AI Chatbot Embed  */}
+        <Script
+          src="https://echodesk-platform.vercel.app/chatbot.js"
+          data-org-id="6a4d06d39ecc5781309cd5fd"
+        ></Script>
+
       </body>
     </html>
-    
+
   );
 }
