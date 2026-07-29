@@ -44,6 +44,7 @@ next-env.d.ts
 
 # docs
 docs/admin_page.md
+INTERVIEW.md
 
 # vapi script
 src/lib/vapi-prompt.ts
