@@ -1,117 +1,127 @@
-# Toothly
+# 🦷 Toothly
 
-AI-powered dental care platform with appointment booking, admin operations, and a real-time voice assistant. Built for a polished, production-ready patient experience with secure auth, database-backed workflows, and transactional email.
+**Toothly** is an AI-powered dental care platform featuring seamless appointment booking, admin operations, real-time voice consultations, and an intelligent **24/7 AI Customer Support Chatbot** powered by **EchoDesk** (a custom-built AI chatbot platform).
 
-## Features
+Built for a polished, production-ready patient experience with secure auth, database-backed workflows, and automated transactional emails.
 
-- AI voice assistant with real-time transcription and audio UX
-- Appointment booking flow with dentist selection, time slots, and confirmation
-- Admin dashboard to manage doctors and appointments
-- Secure authentication, user sync, and subscription-gated routes
-- Transactional email confirmations on booking
-- Responsive marketing site and user dashboard
+---
 
-## Tech Stack
+## ✨ Features
 
-- Next.js 15 (App Router), React 19, TypeScript
-- Tailwind CSS v4, Radix UI primitives, shadcn/ui components
-- Prisma ORM with PostgreSQL
-- Clerk authentication and billing plans
-- Vapi voice SDK for AI calls
-- Resend + React Email for transactional emails
-- TanStack Query for client data caching
-- Biome for linting and formatting
+- **EchoDesk AI Chatbot Integration**: Integrated with [EchoDesk](https://echodesk-platform.vercel.app), a custom AI customer support platform. Provides 24/7 patient assistance, appointment guidance, treatment pricing estimates, and emergency symptom triage.
+- **AI Voice Assistant**: Interactive real-time dental voice calls powered by Vapi SDK.
+- **Appointment Booking System**: Frictionless booking flow with dentist selection, time slot picking, and instant confirmations.
+- **Admin Management Dashboard**: Comprehensive portal to manage doctors, appointment schedules, and patient records.
+- **Secure Authentication & Billing**: Powered by Clerk for user auth, user sync, and tier-gated subscription plans (`AI Basic`, `AI Pro`).
+- **Transactional Emails**: Automated appointment confirmation emails built with Resend & React Email.
+- **Responsive Modern UI**: Modern dark-mode UI built with Next.js 15, Tailwind CSS v4, and Radix UI primitives.
 
-## Product Flow
+---
 
-- Visitors land on the marketing site and can sign up via Clerk.
-- Authenticated users are routed to the dashboard and can book appointments.
-- Booking triggers a confirmation email and shows upcoming appointments.
-- Admins can manage doctors and update appointment statuses.
-- Voice assistant access is gated by paid plans (`ai_basic`, `ai_pro`).
+## 🛠️ Tech Stack
 
-## Routes
+- **Framework**: Next.js 15 (App Router), React 19, TypeScript
+- **AI Chatbot**: [EchoDesk AI](https://echodesk-platform.vercel.app) (Embedded Customer Support Widget)
+- **AI Voice Engine**: Vapi Voice SDK
+- **Styling**: Tailwind CSS v4, Radix UI Primitives, Lucide Icons
+- **Database & ORM**: PostgreSQL with Prisma ORM
+- **Auth & Billing**: Clerk (User Sync + Pricing Tables)
+- **Emails**: Resend + React Email Templates
+- **Data Fetching & Quality**: TanStack Query, Biome (Linting & Formatting)
 
-- `/` marketing site + sign up
-- `/dashboard` user dashboard
-- `/appointments` booking flow + upcoming appointments
-- `/voice` AI voice assistant (plan-gated)
-- `/pro` plan selection (Clerk pricing table)
-- `/admin` admin dashboard (email-gated)
-- `/api/send-appointment-email` transactional email endpoint
+---
 
-## Environment Variables
+## 🚀 Product Flow
 
-Create a `.env.local` file in the project root.
+1. **Visitor Landing**: Visitors explore dental services, doctor profiles, and subscription plans on the landing page.
+2. **24/7 EchoDesk AI Support**: Patients can ask the floating **EchoDesk AI Chatbot** about doctor specialities, treatment pricing, subscription benefits, or after-hours pain advice.
+3. **Dashboard & Appointments**: Authenticated users can browse specialists (**Dr. Rudra Pratap Singh**, **Dr. Arya Thakur**, **Dr. Mayank Bhatt**) and book appointments.
+4. **Email Confirmation**: Booking triggers a transactional confirmation email via Resend.
+5. **AI Voice Consultations**: Subscribed users (`ai_basic` & `ai_pro`) unlock live AI voice calls for instant dental checkups.
+6. **Admin Panel**: Authorized admins manage doctors and update appointment statuses (`CONFIRMED`, `COMPLETED`).
 
-Required by the codebase:
+---
 
-- `DATABASE_URL` (PostgreSQL connection string)
-- `ADMIN_EMAIL` (email allowed to access `/admin`)
-- `RESEND_API_KEY` (Resend API key)
-- `NEXT_PUBLIC_APP_URL` (public app URL for email links)
-- `NEXT_PUBLIC_VAPI_API_KEY` (Vapi public API key)
-- `NEXT_PUBLIC_VAPI_ASSISTANT_ID` (Vapi assistant ID)
+## 🗺️ Application Routes
 
-Auth configuration (Clerk):
+- `/` — Marketing landing page
+- `/dashboard` — User dashboard
+- `/appointments` — Appointment booking flow & schedule overview
+- `/voice` — AI voice consultation (Plan-gated)
+- `/pro` — Subscription tier selection (Clerk Pricing)
+- `/admin` — Admin management dashboard (Email-gated)
+- `/api/send-appointment-email` — Transactional email API endpoint
 
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
-- `CLERK_SECRET_KEY`
+---
 
-## Database
+## ⚙️ Environment Variables
 
-Prisma models:
+Create a `.env.local` file in the root directory:
 
-- `User` with Clerk ID, profile fields, and appointments
-- `Doctor` with profile, status, and appointment counts
-- `Appointment` with status, reason, and timestamps
+```env
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/toothly"
 
-## Getting Started
+# Admin & General Config
+ADMIN_EMAIL="admin@toothly.com"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
-Install dependencies:
+# Resend Email API
+RESEND_API_KEY="re_123456789"
 
-```bash
-npm install
+# Vapi Voice Assistant
+NEXT_PUBLIC_VAPI_API_KEY="your-vapi-public-key"
+NEXT_PUBLIC_VAPI_ASSISTANT_ID="your-vapi-assistant-id"
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="pk_test_..."
+CLERK_SECRET_KEY="sk_test_..."
 ```
 
-Generate Prisma client:
+---
 
-```bash
-npx prisma generate
+## 🛠️ Getting Started
+
+1. **Clone the repository & install dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Generate Prisma Client**:
+   ```bash
+   npx prisma generate
+   ```
+
+3. **Push Database Schema**:
+   ```bash
+   npx prisma db push
+   ```
+
+4. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 💬 EchoDesk Chatbot Integration
+
+Toothly embeds the **EchoDesk AI Widget** globally via `src/app/layout.tsx`:
+
+```tsx
+import Script from "next/script";
+
+<Script
+  src="https://echodesk-platform.vercel.app/chatbot.js"
+  data-org-id="6a4d06d39ecc5781309cd5fd"
+  strategy="afterInteractive"
+/>
 ```
 
-Apply database schema:
+---
 
-```bash
-npx prisma migrate dev
-# or, for quick local setup without migrations
-npx prisma db push
-```
+## 📜 License
 
-Run the dev server:
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:3000`.
-
-## Scripts
-
-- `npm run dev` - start Next.js dev server (Turbopack)
-- `npm run build` - generate Prisma client and build
-- `npm run start` - start production server
-- `npm run lint` - run Biome checks
-- `npm run format` - format with Biome
-
-## Email and Voice
-
-- Appointment confirmations use Resend and React Email templates.
-- Voice calls are powered by Vapi and gated by Clerk plans.
-
-## Deployment Notes
-
-- Configure the same environment variables in your hosting provider.
-- Ensure the database is reachable in production and run migrations.
-- Configure Clerk billing plans with IDs `ai_basic` and `ai_pro`.
-
+This project is open source and available under the [MIT License](LICENSE).
